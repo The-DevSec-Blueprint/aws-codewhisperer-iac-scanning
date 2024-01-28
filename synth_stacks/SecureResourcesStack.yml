@@ -1,0 +1,101 @@
+Resources:
+  TheS3Bucket91FEB669:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: test-s3-bucket
+      VersioningConfiguration:
+        Status: Enabled
+    UpdateReplacePolicy: Retain
+    DeletionPolicy: Retain
+    Metadata:
+      aws:cdk:path: SecureResourcesStack/TheS3Bucket/Resource
+  InstanceRole3CCE2F1D:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action: sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service: ec2.amazonaws.com
+        Version: "2012-10-17"
+      ManagedPolicyArns:
+        - Fn::Join:
+            - ""
+            - - "arn:"
+              - Ref: AWS::Partition
+              - :iam::aws:policy/AdministratorPolicy
+    Metadata:
+      aws:cdk:path: SecureResourcesStack/InstanceRole/Resource
+  SecurityGroupDD263621:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: SecureResourcesStack/SecurityGroup
+      GroupName: dev-test-sg
+      SecurityGroupEgress:
+        - CidrIp: 0.0.0.0/0
+          Description: Allow all outbound traffic by default
+          IpProtocol: "-1"
+      SecurityGroupIngress:
+        - CidrIp: 0.0.0.0/0
+          Description: Allow ALL Inbound Access
+          FromPort: 0
+          IpProtocol: tcp
+          ToPort: 65535
+      VpcId: vpc-083355efbeef405cf
+    Metadata:
+      aws:cdk:path: SecureResourcesStack/SecurityGroup/Resource
+  MyInstanceInstanceProfile2784C631:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Roles:
+        - Ref: InstanceRole3CCE2F1D
+    Metadata:
+      aws:cdk:path: SecureResourcesStack/MyInstance/InstanceProfile
+  MyInstanceA12EC128:
+    Type: AWS::EC2::Instance
+    Properties:
+      AvailabilityZone: us-east-1a
+      IamInstanceProfile:
+        Ref: MyInstanceInstanceProfile2784C631
+      ImageId: ami-0fc61db8544a617ed
+      InstanceType: t2.micro
+      SecurityGroupIds:
+        - Fn::GetAtt:
+            - SecurityGroupDD263621
+            - GroupId
+      SubnetId: subnet-0121e75060eb559e0
+      Tags:
+        - Key: Name
+          Value: dev-test-instance
+      UserData:
+        Fn::Base64: "#!/bin/bash"
+    DependsOn:
+      - InstanceRole3CCE2F1D
+    Metadata:
+      aws:cdk:path: SecureResourcesStack/MyInstance/Resource
+  CDKMetadata:
+    Type: AWS::CDK::Metadata
+    Properties:
+      Analytics: v2:deflate64:H4sIAAAAAAAA/1WOzQ6CMBCEn4V7WQOEF9CD8UbqA5i6LnGltKY/MaTpuwsiiZ5mMjP7ZWtoW6gK9fIl3oZS8xXSOSgchCRvo0MSc3dJvoG0jzhQEIferC4LViMkaTUt4aYn44MySJ2zPWvKgrCeoYTRcZiOzsbnMvsPtqNfQM4f7PePLLop3K3ZNVBV0BYPz1y6aAKPBHLVN7uzbk7OAAAA
+    Metadata:
+      aws:cdk:path: SecureResourcesStack/CDKMetadata/Default
+Parameters:
+  BootstrapVersion:
+    Type: AWS::SSM::Parameter::Value<String>
+    Default: /cdk-bootstrap/hnb659fds/version
+    Description: Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]
+Rules:
+  CheckBootstrapVersion:
+    Assertions:
+      - Assert:
+          Fn::Not:
+            - Fn::Contains:
+                - - "1"
+                  - "2"
+                  - "3"
+                  - "4"
+                  - "5"
+                - Ref: BootstrapVersion
+        AssertDescription: CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.
+

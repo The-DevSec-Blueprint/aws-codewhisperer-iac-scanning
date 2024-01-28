@@ -2,7 +2,7 @@ from aws_cdk import Stack, aws_ec2 as ec2, aws_s3 as s3, aws_iam as iam
 from constructs import Construct
 
 
-class BadResourcesStack(Stack):
+class SecureResourcesStack(Stack):
 
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
@@ -10,7 +10,7 @@ class BadResourcesStack(Stack):
         default_vpc = ec2.Vpc.from_lookup(self, "VPC", is_default=True)
 
         # S3 Bucket
-        s3.Bucket(self, "TheS3Bucket", bucket_name="test-s3-bucket")
+        s3.Bucket(self, "TheS3Bucket", bucket_name="test-s3-bucket", versioned=True)
 
         # IAM Role
         role = iam.Role(
