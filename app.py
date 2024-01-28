@@ -6,6 +6,7 @@ from cdk_cloudformation.bad_resources_stack import BadResourcesStack
 from cdk_cloudformation.secure_resources_stack import SecureResourcesStack
 
 app = cdk.App()
+
 BadResourcesStack(
     app,
     "BadResourcesStack",
@@ -20,4 +21,5 @@ SecureResourcesStack(
         account=os.getenv("CDK_DEFAULT_ACCOUNT"), region=os.getenv("CDK_DEFAULT_REGION")
     ),
 )
+
 app.synth()

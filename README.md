@@ -1,5 +1,8 @@
+# Shifting Left using AI: Detect and Prevent Vulnerabilites using CodeWhisperer and VSCode
 
-# Welcome to your CDK Python project!
+
+
+## Welcome to your CDK Python project!
 
 This is a blank project for CDK development with Python.
 
