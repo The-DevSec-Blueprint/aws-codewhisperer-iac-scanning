@@ -1,4 +1,10 @@
-from aws_cdk import Stack, aws_ec2 as ec2, aws_s3 as s3, aws_iam as iam
+from aws_cdk import (
+    Stack,
+    aws_ec2 as ec2,
+    aws_s3 as s3,
+    aws_iam as iam,
+    aws_apigatewayv2 as apigateway,
+)
 from constructs import Construct
 
 
@@ -8,7 +14,13 @@ class BadResourcesStack(Stack):
         super().__init__(scope, construct_id, **kwargs)
 
         default_vpc = ec2.Vpc.from_lookup(self, "VPC", is_default=True)
-
+        apigateway.CfnStage(
+            self,
+            "rHttpApiDefaultStage",
+            api_id="foo",
+            stage_name="$default",
+            auto_deploy=True,
+        )
         # S3 Bucket
         s3.Bucket(self, "TheS3Bucket", bucket_name="test-s3-bucket")
 

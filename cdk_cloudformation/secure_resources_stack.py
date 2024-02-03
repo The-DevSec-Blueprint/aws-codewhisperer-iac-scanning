@@ -10,7 +10,13 @@ class SecureResourcesStack(Stack):
         default_vpc = ec2.Vpc.from_lookup(self, "VPC", is_default=True)
 
         # S3 Bucket
-        s3.Bucket(self, "TheS3Bucket", bucket_name="test-s3-bucket", versioned=True)
+        s3.Bucket(
+            self,
+            "TheS3Bucket",
+            bucket_name="test-s3-bucket",
+            versioned=True,
+            enforce_ssl=True,
+        )
 
         # IAM Role
         role = iam.Role(
