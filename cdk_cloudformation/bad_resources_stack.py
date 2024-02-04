@@ -21,6 +21,7 @@ class BadResourcesStack(Stack):
             stage_name="$default",
             auto_deploy=True,
         )
+        
         # S3 Bucket
         s3.Bucket(self, "TheS3Bucket", bucket_name="test-s3-bucket")
 

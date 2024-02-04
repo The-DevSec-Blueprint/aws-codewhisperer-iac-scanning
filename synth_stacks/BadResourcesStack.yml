@@ -1,4 +1,12 @@
 Resources:
+  rHttpApiDefaultStage:
+    Type: AWS::ApiGatewayV2::Stage
+    Properties:
+      ApiId: foo
+      StageName: $default
+      AutoDeploy: true
+    Metadata:
+      aws:cdk:path: BadResourcesStack/rHttpApiDefaultStage
   TheS3Bucket91FEB669:
     Type: AWS::S3::Bucket
     Properties:
@@ -75,7 +83,7 @@ Resources:
   CDKMetadata:
     Type: AWS::CDK::Metadata
     Properties:
-      Analytics: v2:deflate64:H4sIAAAAAAAA/1WOzQ6CMBCEn4V7WQOEF9CD8UbqA5i6LnGltKY/MaTpuwsiiZ5mMjP7ZWtoW6gK9fIl3oZS8xXSOSgchCRvo0MSc3dJvoG0jzhQEIferC4LViMkaTUt4aYn44MySJ2zPWvKgrCeoYTRcZiOzsbnMvsPtqNfQM4f7PePLLop3K3ZNVBV0BYPz1y6aAKPBHLVN7uzbk7OAAAA
+      Analytics: v2:deflate64:H4sIAAAAAAAA/1WOTQ6CMBCFz8K+jAHCBXRh3BE4gKl1wBFoSX8kpOndLSKJrt7kmzfvTQ5lCVnCZ5OKe58OdAPfWC56VqNRTgtkcXf1fKKOW5z58srh1Mro6ZCZAvzRiR4ti2ybAiM+gq/VgCvc9SKN5VJgpVVLAwaGIo9VKJwmu5y1ctNq+wf70W9ACJ/Y73eBVYt9KHkoIMugTJ6GKNVOWhoR6k3fiiJI+OQAAAA=
     Metadata:
       aws:cdk:path: BadResourcesStack/CDKMetadata/Default
 Parameters:

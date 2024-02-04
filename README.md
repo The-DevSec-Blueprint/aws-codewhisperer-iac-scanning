@@ -1,4 +1,4 @@
-# Shifting Left using AI: Detect and Prevent Vulnerabilites using CodeWhisperer and VSCode
+# Shifting Left with AI: Catching Vulnerabilities Early using AWS CodeWhisperer and VSCode
 
 ## Getting Started (Prerequsities)
 

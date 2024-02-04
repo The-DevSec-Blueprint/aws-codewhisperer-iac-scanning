@@ -9,6 +9,33 @@ Resources:
     DeletionPolicy: Retain
     Metadata:
       aws:cdk:path: SecureResourcesStack/TheS3Bucket/Resource
+  TheS3BucketPolicy352FCA0C:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket:
+        Ref: TheS3Bucket91FEB669
+      PolicyDocument:
+        Statement:
+          - Action: s3:*
+            Condition:
+              Bool:
+                aws:SecureTransport: "false"
+            Effect: Deny
+            Principal:
+              AWS: "*"
+            Resource:
+              - Fn::GetAtt:
+                  - TheS3Bucket91FEB669
+                  - Arn
+              - Fn::Join:
+                  - ""
+                  - - Fn::GetAtt:
+                        - TheS3Bucket91FEB669
+                        - Arn
+                    - /*
+        Version: "2012-10-17"
+    Metadata:
+      aws:cdk:path: SecureResourcesStack/TheS3Bucket/Policy/Resource
   InstanceRole3CCE2F1D:
     Type: AWS::IAM::Role
     Properties:
@@ -77,7 +104,7 @@ Resources:
   CDKMetadata:
     Type: AWS::CDK::Metadata
     Properties:
-      Analytics: v2:deflate64:H4sIAAAAAAAA/1WOzQ6CMBCEn4V7WQOEF9CD8UbqA5i6LnGltKY/MaTpuwsiiZ5mMjP7ZWtoW6gK9fIl3oZS8xXSOSgchCRvo0MSc3dJvoG0jzhQEIferC4LViMkaTUt4aYn44MySJ2zPWvKgrCeoYTRcZiOzsbnMvsPtqNfQM4f7PePLLop3K3ZNVBV0BYPz1y6aAKPBHLVN7uzbk7OAAAA
+      Analytics: v2:deflate64:H4sIAAAAAAAA/1WOTQ6CQAyFz8J+qAHCBXRh3BE8gBlriZVhxsxPDJnM3QWBqKuvfa99bQl1DUUmXy7HW58rvkI8e4m9aMmZYJHE5F2iqyDuA/bkxaHTa7WgMYpx/MpLnwTLAWJrFM3WxpN2XmqkxpqOFSVBWE4XCYNlPx6tCc957F/Yln4DUvrErk8m0Yz+bvSugqKAOns45twG7XkgaBe+AbCjls7rAAAA
     Metadata:
       aws:cdk:path: SecureResourcesStack/CDKMetadata/Default
 Parameters:
