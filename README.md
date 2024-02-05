@@ -1,5 +1,7 @@
 # Shifting Left with AI: Catching Vulnerabilities Early using AWS CodeWhisperer and VSCode
 
+[![Thumbnail](./docs/images/thumbnail_shiftleft.svg)](https://youtu.be/riFlzaq8PKcA)
+
 ## Getting Started (Prerequsities)
 
 1. Make sure you have NPM/Node.js installed! You can install it by going to clicking [here](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
