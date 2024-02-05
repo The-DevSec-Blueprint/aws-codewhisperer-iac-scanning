@@ -24,9 +24,3 @@ Luckily, I've taken the liberty of installing invoke for our `little` project. T
 inv synth
 ```
 >**NOTE**: Pass in --stack-name to specify the stack that you want.
-
-# Links/Notes
-
-- <https://aws.amazon.com/codewhisperer/features/?refid=f18b371b-8a13-4e1c-9b88-e1d4f702c29a>
-- <https://docs.aws.amazon.com/codewhisperer/latest/userguide/security-scans.html>
-- <https://docs.aws.amazon.com/codeguru/detector-library/python/s3-partial-encrypt-cdk/> -> detector library for various different things
